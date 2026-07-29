@@ -35,6 +35,7 @@ python -m pip install -e ".[test]"
 python -m pytest -q
 python scripts/run_structural_benchmark.py
 python scripts/run_atlas_audit.py
+python scripts/run_spectral_partition_audit.py
 ```
 
 Generated artifacts:
@@ -50,6 +51,15 @@ Generated artifacts:
 - `results/ATLAS_EXHAUSTIVE_AUDIT_REPORT.md`
 - `results/atlas_block_decomposition_outcomes.csv`
 - `results/STRUCTURE_RANDOMNESS_ADAPTATION.md`
+- `results/spectral_partition_rows.csv`
+- `results/spectral_partition_summary.csv`
+- `results/spectral_block_outcome_features.csv`
+- `results/spectral_feature_correlations.csv`
+- `results/spectral_composition_checks.csv`
+- `results/spectral_stress_partition_rows.csv`
+- `results/spectral_partition_comparison.png`
+- `results/spectral_gain_scatter.png`
+- `results/SPECTRAL_PARTITION_REPORT.md`
 
 The benchmark includes a `10`, `26`, `50`, and `82` vertex size ladder of
 compactified checkerboard and one-diagonal-flip triangulations. It directly
@@ -65,6 +75,14 @@ The block layer saves 1,010 theorem-directed search nodes in aggregate on
 this domain, while the emitted outcome table also preserves the 42
 per-instance regressions.
 
+The spectral audit compares true connected components, one-vertex
+articulation separators, Fiedler sign/median cuts, and a balanced BFS
+baseline. It verifies direct-sum and one-vertex coalescence characteristic
+polynomial identities exactly on symbolic fixtures. On the atlas,
+Fiedler-median cuts use fewer boundary edges than equally balanced BFS cuts,
+but block count and articulation count have stronger finite associations
+with search-node savings than the spectral features tested.
+
 ## Scope
 
 This is proof-guided finite software. It is not:
@@ -75,6 +93,10 @@ This is proof-guided finite software. It is not:
 - a formal proof derived from the finite graph-atlas audit;
 - a weighted routing or integrality theorem; or
 - a knot invariant.
+
+For later knot work, the report records the precise alternating-diagram
+bridge through Tait-graph spanning-tree counts and the Matrix-Tree Theorem;
+no diagram parser or knot classification claim is included here.
 
 NetworkX supplies planarity recognition. Every emitted coloring certificate
 is checked independently against every edge.
@@ -91,3 +113,6 @@ is checked independently against every edge.
   https://networkx.org/documentation/stable/reference/generated/networkx.generators.atlas.graph_atlas_g.html
 - Alweiss, Bowen, and Sabok, *Sums, products, and exponents in
   two-colorings of the naturals*: https://arxiv.org/abs/2512.09598
+- Matrix-Tree Theorem background: https://arxiv.org/abs/2209.01284
+- Alternating-link determinant and Tait spanning trees:
+  https://repository.lsu.edu/mathematics_pubs/235/
