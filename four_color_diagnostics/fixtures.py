@@ -67,6 +67,85 @@ def flip_diagonal(
     return tuple(tuple(values) for values in mutable)
 
 
+def seeded_diagonals(
+    cell_count: int,
+    seed: int,
+) -> tuple[tuple[bool, ...], ...]:
+    """Return a reproducible irregular diagonal field."""
+
+    if cell_count < 1:
+        raise ValueError("cell_count must be positive")
+    state = seed & 0xFFFFFFFF
+    rows = []
+    for _ in range(cell_count):
+        row = []
+        for _ in range(cell_count):
+            state = (1664525 * state + 1013904223) & 0xFFFFFFFF
+            row.append(bool(state & 0x80000000))
+        rows.append(tuple(row))
+    return tuple(rows)
+
+
+def stacked_triangulation(vertex_count: int) -> Graph:
+    """Build a deterministic stacked sphere triangulation from K4."""
+
+    if vertex_count < 4:
+        raise ValueError("a stacked triangulation needs at least four vertices")
+    edges = {
+        (0, 1),
+        (0, 2),
+        (0, 3),
+        (1, 2),
+        (1, 3),
+        (2, 3),
+    }
+    faces = [
+        (0, 1, 2),
+        (0, 1, 3),
+        (0, 2, 3),
+        (1, 2, 3),
+    ]
+    for vertex in range(4, vertex_count):
+        face_index = (vertex * 2654435761) % len(faces)
+        first, second, third = faces.pop(face_index)
+        for neighbor in (first, second, third):
+            edges.add(
+                (neighbor, vertex)
+                if neighbor < vertex
+                else (vertex, neighbor)
+            )
+        faces.extend(
+            (
+                (first, second, vertex),
+                (second, third, vertex),
+                (third, first, vertex),
+            )
+        )
+    return Graph.from_edges(vertex_count, edges)
+
+
+def stress_fixtures() -> tuple[tuple[str, Graph], ...]:
+    fixtures = []
+    for cell_count in (4, 6, 8):
+        for seed in (7, 19):
+            fixtures.append(
+                (
+                    f"compactified_seeded_{cell_count}_{seed}",
+                    compactified_grid_triangulation(
+                        seeded_diagonals(cell_count, seed)
+                    ),
+                )
+            )
+    for vertex_count in (12, 24, 48):
+        fixtures.append(
+            (
+                f"stacked_triangulation_{vertex_count}",
+                stacked_triangulation(vertex_count),
+            )
+        )
+    return tuple(fixtures)
+
+
 def named_fixtures() -> tuple[tuple[str, Graph], ...]:
     import networkx as nx
 
@@ -100,4 +179,5 @@ def named_fixtures() -> tuple[tuple[str, Graph], ...]:
                 ),
             )
         )
+    fixtures.extend(stress_fixtures())
     return tuple(fixtures)

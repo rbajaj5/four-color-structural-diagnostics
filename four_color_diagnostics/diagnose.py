@@ -25,6 +25,8 @@ class Diagnosis:
     triangle_free: bool
     sphere_triangulation: bool
     all_degrees_even: bool
+    dual_bipartite: bool | None
+    odd_degree_vertices: tuple[int, ...]
     structural_search_nodes: int
     structural_backtracks: int
 
@@ -45,6 +47,8 @@ def _planar_facts(graph: Graph) -> dict[str, Any]:
             "triangle_free": False,
             "sphere_triangulation": False,
             "all_degrees_even": False,
+            "dual_bipartite": None,
+            "odd_degree_vertices": (),
         }
     embedding.check_structure()
     triangle_free = sum(nx.triangles(nx_graph).values()) == 0
@@ -56,14 +60,61 @@ def _planar_facts(graph: Graph) -> dict[str, Any]:
         and connected
         and len(graph.edges) == 3 * graph.vertex_count - 6
     )
+    odd_degree_vertices = tuple(
+        vertex
+        for vertex, degree in enumerate(graph.degrees)
+        if degree % 2
+    )
+    dual_bipartite = (
+        _triangulation_dual_is_bipartite(graph, embedding)
+        if sphere_triangulation
+        else None
+    )
+    if (
+        sphere_triangulation
+        and dual_bipartite != (not odd_degree_vertices)
+    ):
+        raise AssertionError(
+            "triangulation parity and dual-bipartiteness disagree"
+        )
     return {
         "planar": True,
         "triangle_free": triangle_free,
         "sphere_triangulation": sphere_triangulation,
-        "all_degrees_even": all(
-            degree % 2 == 0 for degree in graph.degrees
-        ),
+        "all_degrees_even": not odd_degree_vertices,
+        "dual_bipartite": dual_bipartite,
+        "odd_degree_vertices": odd_degree_vertices,
     }
+
+
+def _triangulation_dual_is_bipartite(
+    graph: Graph,
+    embedding: Any,
+) -> bool:
+    """Construct the planar dual from an embedding and test bipartiteness."""
+
+    import networkx as nx
+
+    visited: set[tuple[int, int]] = set()
+    face_for_half_edge: dict[tuple[int, int], int] = {}
+    face_count = 0
+    for first, second in embedding.edges():
+        if (first, second) in visited:
+            continue
+        boundary = embedding.traverse_face(first, second, visited)
+        for index, vertex in enumerate(boundary):
+            following = boundary[(index + 1) % len(boundary)]
+            face_for_half_edge[(vertex, following)] = face_count
+        face_count += 1
+
+    dual = nx.Graph()
+    dual.add_nodes_from(range(face_count))
+    for first, second in graph.edges:
+        left = face_for_half_edge[(first, second)]
+        right = face_for_half_edge[(second, first)]
+        if left != right:
+            dual.add_edge(left, right)
+    return nx.is_bipartite(dual)
 
 
 def _checked_diagnosis(
@@ -89,6 +140,8 @@ def _checked_diagnosis(
         triangle_free=bool(facts["triangle_free"]),
         sphere_triangulation=bool(facts["sphere_triangulation"]),
         all_degrees_even=bool(facts["all_degrees_even"]),
+        dual_bipartite=facts["dual_bipartite"],
+        odd_degree_vertices=tuple(facts["odd_degree_vertices"]),
         structural_search_nodes=0 if search is None else search.search_nodes,
         structural_backtracks=0 if search is None else search.backtracks,
     )

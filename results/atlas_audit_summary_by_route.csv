@@ -1,0 +1,8 @@
+route,graph_count,exact_match_count,certificate_valid_count,independent_assignments_tested
+bipartite,137,137,137,3101
+edgeless,7,7,7,7
+eulerian_sphere_triangulation,2,2,2,185
+generic_planar_three_color_no,237,237,237,434159
+generic_planar_three_color_yes,602,602,602,182166
+non_eulerian_sphere_triangulation,8,8,8,11285
+triangle_free_non_bipartite,22,22,22,5691

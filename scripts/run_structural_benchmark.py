@@ -91,6 +91,16 @@ def make_report(rows: list[dict[str, Any]]) -> str:
     one_flip.sort(key=lambda row: int(row["vertex_count"]))
     one_flip_start = one_flip[0]
     one_flip_end = one_flip[-1]
+    triangulation_rows = [
+        row for row in rows if row["sphere_triangulation"]
+    ]
+    dual_checks_passed = sum(
+        row["dual_bipartite"] == row["all_degrees_even"]
+        for row in triangulation_rows
+    )
+    stress_rows = [
+        row for row in rows if row["fixture_family"] == "stress"
+    ]
     table = "\n".join(
         "| {fixture_id} | {vertex_count} | {edge_count} | {chromatic_number} | "
         "{route} | {generic_search_nodes} | {structural_search_nodes} | "
@@ -125,6 +135,12 @@ failed 3-color search: measured savings grow from
 not an asymptotic bound. The other fixtures cover edgeless, bipartite,
 triangle-free non-bipartite, and generic planar branches.
 
+The expanded workload adds `{len(stress_rows)}` deterministic irregular-grid
+and stacked-triangulation fixtures. The primal even-degree test agreed with
+an explicitly constructed dual-graph bipartiteness test on all
+`{dual_checks_passed}` sphere triangulations. This is a redundant structural
+check, independent of the final edge-by-edge coloring verification.
+
 ## Algorithmic Interpretation
 
 For an arbitrary planar graph that is not settled structurally, exact
@@ -158,6 +174,11 @@ def main() -> None:
             raise AssertionError("structural and generic diagnoses disagree")
         row = {
             "fixture_id": fixture_id,
+            "fixture_family": (
+                "stress"
+                if fixture_id.startswith(("compactified_seeded_", "stacked_"))
+                else "baseline"
+            ),
             "vertex_count": graph.vertex_count,
             "edge_count": len(graph.edges),
             "chromatic_number": diagnosis.chromatic_number,
@@ -166,6 +187,10 @@ def main() -> None:
             "triangle_free": diagnosis.triangle_free,
             "sphere_triangulation": diagnosis.sphere_triangulation,
             "all_degrees_even": diagnosis.all_degrees_even,
+            "dual_bipartite": diagnosis.dual_bipartite,
+            "odd_degree_vertex_count": len(
+                diagnosis.odd_degree_vertices
+            ),
             "certificate_valid": diagnosis.certificate_valid,
             "generic_search_nodes": generic_nodes,
             "generic_backtracks": generic_backtracks,

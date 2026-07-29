@@ -18,3 +18,4 @@ jobs:
       - run: python -m pip install -e ".[test]"
       - run: python -m pytest -q
       - run: python scripts/run_structural_benchmark.py
+      - run: python scripts/run_atlas_audit.py

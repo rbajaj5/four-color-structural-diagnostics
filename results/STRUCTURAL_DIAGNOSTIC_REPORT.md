@@ -3,9 +3,9 @@
 ## Result
 
 The executable hierarchy produced valid exact coloring certificates for all
-16 fixtures. It used `387` DSATUR search nodes after
-structural preprocessing, compared with `633` for blind
-increasing-palette search, saving `246` nodes on this finite benchmark.
+25 fixtures. It used `1285` DSATUR search nodes after
+structural preprocessing, compared with `1616` for blind
+increasing-palette search, saving `331` nodes on this finite benchmark.
 
 | Fixture | V | E | chi | Certified route | Generic nodes | Structural nodes | Saved |
 | --- | ---: | ---: | ---: | --- | ---: | ---: | ---: |
@@ -25,6 +25,15 @@ increasing-palette search, saving `246` nodes on this finite benchmark.
 | compactified_one_flip_6 | 50 | 144 | 4 | non_eulerian_sphere_triangulation | 104 | 51 | 53 |
 | compactified_checkerboard_8 | 82 | 240 | 3 | eulerian_sphere_triangulation | 86 | 83 | 3 |
 | compactified_one_flip_8 | 82 | 240 | 4 | non_eulerian_sphere_triangulation | 166 | 83 | 83 |
+| compactified_seeded_4_7 | 26 | 72 | 4 | non_eulerian_sphere_triangulation | 38 | 27 | 11 |
+| compactified_seeded_4_19 | 26 | 72 | 4 | non_eulerian_sphere_triangulation | 55 | 44 | 11 |
+| compactified_seeded_6_7 | 50 | 144 | 4 | non_eulerian_sphere_triangulation | 519 | 508 | 11 |
+| compactified_seeded_6_19 | 50 | 144 | 4 | non_eulerian_sphere_triangulation | 60 | 51 | 9 |
+| compactified_seeded_8_7 | 82 | 240 | 4 | non_eulerian_sphere_triangulation | 109 | 98 | 11 |
+| compactified_seeded_8_19 | 82 | 240 | 4 | non_eulerian_sphere_triangulation | 94 | 83 | 11 |
+| stacked_triangulation_12 | 12 | 30 | 4 | non_eulerian_sphere_triangulation | 20 | 13 | 7 |
+| stacked_triangulation_24 | 24 | 66 | 4 | non_eulerian_sphere_triangulation | 32 | 25 | 7 |
+| stacked_triangulation_48 | 48 | 138 | 4 | non_eulerian_sphere_triangulation | 56 | 49 | 7 |
 
 ## Routes
 
@@ -33,7 +42,7 @@ increasing-palette search, saving `246` nodes on this finite benchmark.
 - `eulerian_sphere_triangulation`: 5
 - `generic_planar_three_color_no`: 1
 - `generic_planar_three_color_yes`: 1
-- `non_eulerian_sphere_triangulation`: 5
+- `non_eulerian_sphere_triangulation`: 14
 - `triangle_free_non_bipartite`: 1
 
 The compactified checkerboard and one-flip size ladder exercises the exact
@@ -46,6 +55,12 @@ failed 3-color search: measured savings grow from
 `V=82`. This is a finite workload observation,
 not an asymptotic bound. The other fixtures cover edgeless, bipartite,
 triangle-free non-bipartite, and generic planar branches.
+
+The expanded workload adds `9` deterministic irregular-grid
+and stacked-triangulation fixtures. The primal even-degree test agreed with
+an explicitly constructed dual-graph bipartiteness test on all
+`19` sphere triangulations. This is a redundant structural
+check, independent of the final edge-by-edge coloring verification.
 
 ## Algorithmic Interpretation
 
