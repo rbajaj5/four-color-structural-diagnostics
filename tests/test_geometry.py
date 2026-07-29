@@ -6,6 +6,7 @@ import pytest
 from four_color_diagnostics.geometry import (
     canonical_gauss_signature,
     crossing_vertex_parameter_margin,
+    fibonacci_sphere_directions,
     figure_eight_knot_points,
     minimum_nonlocal_vertex_clearance,
     polygon_length,
@@ -70,3 +71,10 @@ def test_crossing_vertex_parameter_margin_detects_endpoint_degeneracy() -> None:
         (8.25, 2.0, -1.0, -1.0),
     )
     assert crossing_vertex_parameter_margin(raw) == 0.0
+
+
+def test_fibonacci_sphere_directions_are_unit_vectors() -> None:
+    directions = fibonacci_sphere_directions(64)
+    assert directions.shape == (64, 3)
+    assert np.allclose(np.linalg.norm(directions, axis=1), 1.0)
+    assert abs(float(directions[:, 2].mean())) < 1e-12

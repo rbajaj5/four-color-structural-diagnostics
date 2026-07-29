@@ -1,0 +1,4 @@
+fixture,direction_count,extraction_pass_count,determinant_pass_count,raw_minimal_diagram_count,simplified_fixture_pass_count,alternating_projection_count,minimum_raw_crossings,maximum_raw_crossings,minimum_crossing_angle_degrees,minimum_crossing_vertex_parameter_margin,total_runtime_seconds
+3_1_torus_T_2_3,128,128,128,62,98,62,3,9,1.5424928999923615,0.00023421422491765043,0.5447956001007697
+5_1_torus_T_2_5,128,128,128,17,56,17,5,18,1.5657311396617761,8.098740327255882e-05,0.8905396000045585
+4_1_figure_eight,128,128,128,35,57,35,4,19,1.4269766809819149,0.0002777901329125143,1.0778718001529342

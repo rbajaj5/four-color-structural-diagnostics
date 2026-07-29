@@ -38,6 +38,7 @@ python scripts/run_atlas_audit.py
 python scripts/run_spectral_partition_audit.py
 python scripts/run_tait_spectral_gate.py
 python scripts/run_polygonal_projection_stability.py  # optional backend
+python scripts/run_angular_projection_sweep.py  # optional backend
 ```
 
 Generated artifacts:
@@ -75,6 +76,12 @@ Generated artifacts:
 - `results/polygonal_projection_stability_errors.csv`
 - `results/polygonal_projection_stability.png`
 - `results/POLYGONAL_PROJECTION_STABILITY_REPORT.md`
+- `results/angular_projection_sweep_rows.csv`
+- `results/angular_projection_sweep_summary.csv`
+- `results/angular_projection_margin_buckets.csv`
+- `results/angular_projection_sweep_errors.csv`
+- `results/angular_projection_sweep.png`
+- `results/ANGULAR_PROJECTION_SWEEP_REPORT.md`
 
 The benchmark includes a `10`, `26`, `50`, and `82` vertex size ladder of
 compactified checkerboard and one-diagonal-flip triangulations. It directly
@@ -136,6 +143,15 @@ subdivision. All tested small generic tilts avoid that trefoil failure.
 core dependencies. The script writes an explicit backend audit and exits if
 `pyknotid` is unavailable. This keeps the exact graph and Tait test suite
 portable across the Python versions used in CI.
+
+A deterministic 128-direction Fibonacci-sphere audit then broadens the
+projection check. All 384 extracted diagrams retain the fixture's Fox
+determinant, while raw crossing counts vary from `3-9`, `5-18`, and `4-19`
+for the three fixtures. Minimal diagrams occupy only a subset of directions;
+their crossing-angle and crossing-to-vertex margins are larger on average
+than those of extra-crossing views. The bounded simplifier is explicitly
+treated as incomplete, so an unresolved diagram is not called a different
+knot.
 
 NetworkX supplies planarity recognition. Every emitted coloring certificate
 is checked independently against every edge.

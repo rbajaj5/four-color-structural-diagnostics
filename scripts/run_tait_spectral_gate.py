@@ -361,16 +361,22 @@ No random-knot central limit theorem follows from Pardon's polygon result.
 
 1. **Geometry/topology joint audit:** compare distortion and
    separator-intersection counts with Tait spectral features.
-2. **Affine-normalized random projections:** decompose diagram statistics
-   into angular sectors and estimate dependence before proposing a limit
-   law.
-3. **Projection-margin certification:** replace empirical angular/depth
+2. **Projection-margin certification:** replace empirical angular/depth
    margins with interval-certified crossing persistence where practical.
+3. **Affine-normalized random projections:** extend the deterministic
+   angular sweep with affine normalization and dependence estimates before
+   proposing a limit law.
 
 The original first-ranked projection/refinement experiment is implemented
 by `run_polygonal_projection_stability.py`. Its finite results separate
 exact subdivision, smooth resampling, generic projection tilts, and
 Reidemeister simplification.
+
+`run_angular_projection_sweep.py` implements a finite deterministic
+precursor to the third item. It samples 128 Fibonacci-sphere directions per
+fixture and buckets raw-minimal, simplifiable, and unresolved diagrams by
+their angular and vertex-incidence margins. It does not establish a random
+projection limit theorem.
 """
 
 

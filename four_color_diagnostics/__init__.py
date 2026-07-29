@@ -7,6 +7,7 @@ from .graph import Graph
 from .geometry import (
     canonical_gauss_signature,
     crossing_vertex_parameter_margin,
+    fibonacci_sphere_directions,
     figure_eight_knot_points,
     minimum_nonlocal_vertex_clearance,
     polygon_length,
@@ -50,6 +51,7 @@ __all__ = [
     "connected_component_partition",
     "crossing_vertex_parameter_margin",
     "diagnose_planar_graph",
+    "fibonacci_sphere_directions",
     "figure_eight_knot_points",
     "fiedler_partition",
     "faces_from_pd_code",

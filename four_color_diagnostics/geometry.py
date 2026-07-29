@@ -11,6 +11,25 @@ import numpy as np
 PointArray = np.ndarray
 
 
+def fibonacci_sphere_directions(count: int) -> PointArray:
+    """Generate deterministic, approximately uniform directions on a sphere."""
+
+    if count < 2:
+        raise ValueError("at least two directions are required")
+    index = np.arange(count, dtype=float) + 0.5
+    vertical = 1.0 - 2.0 * index / count
+    radius = np.sqrt(np.maximum(0.0, 1.0 - vertical * vertical))
+    golden_angle = np.pi * (3.0 - np.sqrt(5.0))
+    azimuth = golden_angle * index
+    return np.column_stack(
+        (
+            radius * np.cos(azimuth),
+            radius * np.sin(azimuth),
+            vertical,
+        )
+    )
+
+
 def _closed_polygon(points: Sequence[Sequence[float]] | np.ndarray) -> PointArray:
     polygon = np.asarray(points, dtype=float)
     if polygon.ndim != 2 or polygon.shape[1] != 3:
