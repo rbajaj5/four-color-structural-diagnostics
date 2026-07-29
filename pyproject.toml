@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "four-color-structural-diagnostics"
+version = "0.1.0"
+description = "Proof-guided exact chromatic diagnostics for finite planar graphs"
+requires-python = ">=3.11"
+dependencies = [
+    "matplotlib>=3.8",
+    "networkx>=3.2",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["four_color_diagnostics*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

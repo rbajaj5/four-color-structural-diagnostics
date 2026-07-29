@@ -1,0 +1,17 @@
+fixture_id,vertex_count,edge_count,chromatic_number,route,theorem,triangle_free,sphere_triangulation,all_degrees_even,certificate_valid,generic_search_nodes,generic_backtracks,structural_search_nodes,structural_backtracks,search_nodes_saved
+edgeless_8,8,0,1,edgeless,direct inspection,True,False,True,True,9,0,0,0,9
+path_8,8,7,2,bipartite,odd-cycle characterization,True,False,False,True,10,1,0,0,10
+odd_cycle_7,7,7,3,triangle_free_non_bipartite,Groetzsch plus odd-cycle lower bound,True,False,True,True,15,7,8,0,7
+octahedral,6,12,3,eulerian_sphere_triangulation,Heawood parity criterion plus Four Color,False,True,True,True,10,3,7,0,3
+tetrahedral_K4,4,6,4,non_eulerian_sphere_triangulation,Heawood parity criterion plus Four Color,False,True,False,True,12,7,5,0,7
+wheel_6,6,10,4,generic_planar_three_color_no,3-color obstruction plus Four Color,False,False,False,True,18,11,15,8,3
+wheel_7,7,12,3,generic_planar_three_color_yes,fixed 3-color decision,False,False,False,True,11,3,8,0,3
+grid_4x4,16,24,2,bipartite,odd-cycle characterization,True,False,False,True,18,1,0,0,18
+compactified_checkerboard_2,10,24,3,eulerian_sphere_triangulation,Heawood parity criterion plus Four Color,False,True,True,True,14,3,11,0,3
+compactified_one_flip_2,10,24,4,non_eulerian_sphere_triangulation,Heawood parity criterion plus Four Color,False,True,False,True,18,7,11,0,7
+compactified_checkerboard_4,26,72,3,eulerian_sphere_triangulation,Heawood parity criterion plus Four Color,False,True,True,True,30,3,27,0,3
+compactified_one_flip_4,26,72,4,non_eulerian_sphere_triangulation,Heawood parity criterion plus Four Color,False,True,False,True,58,31,27,0,31
+compactified_checkerboard_6,50,144,3,eulerian_sphere_triangulation,Heawood parity criterion plus Four Color,False,True,True,True,54,3,51,0,3
+compactified_one_flip_6,50,144,4,non_eulerian_sphere_triangulation,Heawood parity criterion plus Four Color,False,True,False,True,104,53,51,0,53
+compactified_checkerboard_8,82,240,3,eulerian_sphere_triangulation,Heawood parity criterion plus Four Color,False,True,True,True,86,3,83,0,3
+compactified_one_flip_8,82,240,4,non_eulerian_sphere_triangulation,Heawood parity criterion plus Four Color,False,True,False,True,166,83,83,0,83
