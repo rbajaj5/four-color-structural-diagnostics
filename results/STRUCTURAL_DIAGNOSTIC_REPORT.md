@@ -3,9 +3,9 @@
 ## Result
 
 The executable hierarchy produced valid exact coloring certificates for all
-25 fixtures. It used `1285` DSATUR search nodes after
-structural preprocessing, compared with `1616` for blind
-increasing-palette search, saving `331` nodes on this finite benchmark.
+28 fixtures. It used `1425` DSATUR search nodes after
+structural preprocessing, compared with `1727` for blind
+increasing-palette search, saving `302` nodes on this finite benchmark.
 
 | Fixture | V | E | chi | Certified route | Generic nodes | Structural nodes | Saved |
 | --- | ---: | ---: | ---: | --- | ---: | ---: | ---: |
@@ -34,10 +34,14 @@ increasing-palette search, saving `331` nodes on this finite benchmark.
 | stacked_triangulation_12 | 12 | 30 | 4 | non_eulerian_sphere_triangulation | 20 | 13 | 7 |
 | stacked_triangulation_24 | 24 | 66 | 4 | non_eulerian_sphere_triangulation | 32 | 25 | 7 |
 | stacked_triangulation_48 | 48 | 138 | 4 | non_eulerian_sphere_triangulation | 56 | 49 | 7 |
+| articulation_k4_chain_4 | 13 | 24 | 4 | block_decomposition | 21 | 20 | 1 |
+| articulation_k4_chain_8 | 25 | 48 | 4 | block_decomposition | 33 | 40 | -7 |
+| articulation_k4_chain_16 | 49 | 96 | 4 | block_decomposition | 57 | 80 | -23 |
 
 ## Routes
 
 - `bipartite`: 2
+- `block_decomposition`: 3
 - `edgeless`: 1
 - `eulerian_sphere_triangulation`: 5
 - `generic_planar_three_color_no`: 1
@@ -56,11 +60,18 @@ failed 3-color search: measured savings grow from
 not an asymptotic bound. The other fixtures cover edgeless, bipartite,
 triangle-free non-bipartite, and generic planar branches.
 
-The expanded workload adds `9` deterministic irregular-grid
-and stacked-triangulation fixtures. The primal even-degree test agreed with
-an explicitly constructed dual-graph bipartiteness test on all
+The expanded workload adds `12` deterministic irregular-grid,
+stacked-triangulation, and articulation-chain fixtures. The primal
+even-degree test agreed with an explicitly constructed dual-graph
+bipartiteness test on all
 `19` sphere triangulations. This is a redundant structural
 check, independent of the final edge-by-edge coloring verification.
+
+The K4 articulation chains deliberately expose the decomposition tradeoff.
+Their search-node differences were
+`1, -7, -23`:
+local certificate gluing is exact, but repeated dense blocks can cost more
+search nodes than a single global DSATUR traversal.
 
 ## Algorithmic Interpretation
 

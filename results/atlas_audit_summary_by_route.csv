@@ -1,8 +1,9 @@
-route,graph_count,exact_match_count,certificate_valid_count,independent_assignments_tested
-bipartite,137,137,137,3101
-edgeless,7,7,7,7
-eulerian_sphere_triangulation,2,2,2,185
-generic_planar_three_color_no,237,237,237,434159
-generic_planar_three_color_yes,602,602,602,182166
-non_eulerian_sphere_triangulation,8,8,8,11285
-triangle_free_non_bipartite,22,22,22,5691
+route,graph_count,exact_match_count,certificate_valid_count,independent_assignments_tested,preblock_search_nodes,block_search_nodes,block_search_nodes_saved
+bipartite,137,137,137,3101,0,0,0
+block_decomposition,532,532,532,358495,4694,3684,1010
+edgeless,7,7,7,7,0,0,0
+eulerian_sphere_triangulation,2,2,2,185,11,11,0
+generic_planar_three_color_no,110,110,110,193704,1405,1405,0
+generic_planar_three_color_yes,210,210,210,67348,1641,1641,0
+non_eulerian_sphere_triangulation,8,8,8,11285,58,58,0
+triangle_free_non_bipartite,9,9,9,2469,69,69,0

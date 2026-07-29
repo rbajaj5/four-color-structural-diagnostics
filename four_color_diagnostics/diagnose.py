@@ -27,6 +27,7 @@ class Diagnosis:
     all_degrees_even: bool
     dual_bipartite: bool | None
     odd_degree_vertices: tuple[int, ...]
+    block_count: int
     structural_search_nodes: int
     structural_backtracks: int
 
@@ -126,6 +127,7 @@ def _checked_diagnosis(
     coloring: tuple[int, ...],
     facts: dict[str, Any],
     search: ColoringResult | None,
+    block_count: int = 1,
 ) -> Diagnosis:
     valid = verify_coloring(graph, coloring, chromatic_number)
     if not valid:
@@ -142,12 +144,149 @@ def _checked_diagnosis(
         all_degrees_even=bool(facts["all_degrees_even"]),
         dual_bipartite=facts["dual_bipartite"],
         odd_degree_vertices=tuple(facts["odd_degree_vertices"]),
+        block_count=block_count,
         structural_search_nodes=0 if search is None else search.search_nodes,
         structural_backtracks=0 if search is None else search.backtracks,
     )
 
 
-def diagnose_planar_graph(graph: Graph) -> Diagnosis:
+def _induced_block(
+    graph: Graph,
+    vertices: frozenset[int],
+) -> tuple[Graph, tuple[int, ...]]:
+    ordered = tuple(sorted(vertices))
+    local_index = {
+        vertex: index for index, vertex in enumerate(ordered)
+    }
+    edges = (
+        (local_index[first], local_index[second])
+        for first, second in graph.edges
+        if first in vertices and second in vertices
+    )
+    return Graph.from_edges(len(ordered), edges), ordered
+
+
+def _block_decomposition(
+    graph: Graph,
+) -> tuple[tuple[frozenset[int], ...], tuple[int, ...]] | None:
+    import networkx as nx
+
+    nx_graph = graph.to_networkx()
+    blocks = tuple(
+        sorted(
+            (
+                frozenset(component)
+                for component in nx.biconnected_components(nx_graph)
+            ),
+            key=lambda block: (min(block), len(block), tuple(sorted(block))),
+        )
+    )
+    isolates = tuple(
+        vertex for vertex, degree in enumerate(graph.degrees) if degree == 0
+    )
+    if len(blocks) + len(isolates) <= 1:
+        return None
+    return blocks, isolates
+
+
+def _diagnose_by_blocks(
+    graph: Graph,
+    facts: dict[str, Any],
+    blocks: tuple[frozenset[int], ...],
+    isolates: tuple[int, ...],
+) -> Diagnosis:
+    local_data = []
+    for block in blocks:
+        local_graph, original_vertices = _induced_block(graph, block)
+        local_data.append(
+            (
+                block,
+                original_vertices,
+                diagnose_planar_graph(local_graph),
+            )
+        )
+
+    chromatic_number = max(
+        [1 if isolates else 0]
+        + [diagnosis.chromatic_number for _, _, diagnosis in local_data]
+    )
+    coloring = [-1] * graph.vertex_count
+    for vertex in isolates:
+        coloring[vertex] = 0
+
+    remaining = set(range(len(local_data)))
+    while remaining:
+        frontier = [
+            index
+            for index in remaining
+            if sum(
+                coloring[vertex] >= 0
+                for vertex in local_data[index][0]
+            )
+            == 1
+        ]
+        index = min(frontier) if frontier else min(remaining)
+        block, original_vertices, diagnosis = local_data[index]
+        shared = [
+            vertex for vertex in block if coloring[vertex] >= 0
+        ]
+        if len(shared) > 1:
+            raise AssertionError("block traversal is not a block-cut forest")
+
+        local_to_global: dict[int, int] = {}
+        if shared:
+            articulation = shared[0]
+            local_vertex = original_vertices.index(articulation)
+            local_to_global[diagnosis.coloring[local_vertex]] = coloring[
+                articulation
+            ]
+        available = [
+            color
+            for color in range(chromatic_number)
+            if color not in local_to_global.values()
+        ]
+        for local_color in range(diagnosis.chromatic_number):
+            if local_color not in local_to_global:
+                local_to_global[local_color] = available.pop(0)
+        for local_vertex, original_vertex in enumerate(original_vertices):
+            mapped = local_to_global[diagnosis.coloring[local_vertex]]
+            if coloring[original_vertex] not in (-1, mapped):
+                raise AssertionError("inconsistent articulation color")
+            coloring[original_vertex] = mapped
+        remaining.remove(index)
+
+    if any(color < 0 for color in coloring):
+        raise AssertionError("block gluing left an uncolored vertex")
+    search = ColoringResult(
+        feasible=True,
+        coloring=tuple(coloring),
+        search_nodes=sum(
+            diagnosis.structural_search_nodes
+            for _, _, diagnosis in local_data
+        ),
+        backtracks=sum(
+            diagnosis.structural_backtracks
+            for _, _, diagnosis in local_data
+        ),
+        color_count=chromatic_number,
+    )
+    return _checked_diagnosis(
+        graph,
+        chromatic_number=chromatic_number,
+        route="block_decomposition",
+        theorem="chromatic number is the maximum over graph blocks",
+        coloring=tuple(coloring),
+        facts=facts,
+        search=search,
+        block_count=len(blocks) + len(isolates),
+    )
+
+
+def diagnose_planar_graph(
+    graph: Graph,
+    *,
+    use_block_decomposition: bool = True,
+) -> Diagnosis:
     """Return exact ``chi`` and an independently checkable coloring."""
 
     facts = _planar_facts(graph)
@@ -175,6 +314,20 @@ def diagnose_planar_graph(graph: Graph) -> Diagnosis:
             coloring=two_coloring,
             facts=facts,
             search=None,
+        )
+
+    decomposition = (
+        _block_decomposition(graph)
+        if use_block_decomposition
+        else None
+    )
+    if decomposition is not None:
+        blocks, isolates = decomposition
+        return _diagnose_by_blocks(
+            graph,
+            facts,
+            blocks,
+            isolates,
         )
 
     if facts["triangle_free"]:

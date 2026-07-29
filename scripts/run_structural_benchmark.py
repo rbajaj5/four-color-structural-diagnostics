@@ -101,6 +101,11 @@ def make_report(rows: list[dict[str, Any]]) -> str:
     stress_rows = [
         row for row in rows if row["fixture_family"] == "stress"
     ]
+    articulation_rows = [
+        row
+        for row in rows
+        if str(row["fixture_id"]).startswith("articulation_k4_chain_")
+    ]
     table = "\n".join(
         "| {fixture_id} | {vertex_count} | {edge_count} | {chromatic_number} | "
         "{route} | {generic_search_nodes} | {structural_search_nodes} | "
@@ -135,11 +140,18 @@ failed 3-color search: measured savings grow from
 not an asymptotic bound. The other fixtures cover edgeless, bipartite,
 triangle-free non-bipartite, and generic planar branches.
 
-The expanded workload adds `{len(stress_rows)}` deterministic irregular-grid
-and stacked-triangulation fixtures. The primal even-degree test agreed with
-an explicitly constructed dual-graph bipartiteness test on all
+The expanded workload adds `{len(stress_rows)}` deterministic irregular-grid,
+stacked-triangulation, and articulation-chain fixtures. The primal
+even-degree test agreed with an explicitly constructed dual-graph
+bipartiteness test on all
 `{dual_checks_passed}` sphere triangulations. This is a redundant structural
 check, independent of the final edge-by-edge coloring verification.
+
+The K4 articulation chains deliberately expose the decomposition tradeoff.
+Their search-node differences were
+`{", ".join(str(row["search_nodes_saved"]) for row in articulation_rows)}`:
+local certificate gluing is exact, but repeated dense blocks can cost more
+search nodes than a single global DSATUR traversal.
 
 ## Algorithmic Interpretation
 
@@ -176,7 +188,13 @@ def main() -> None:
             "fixture_id": fixture_id,
             "fixture_family": (
                 "stress"
-                if fixture_id.startswith(("compactified_seeded_", "stacked_"))
+                if fixture_id.startswith(
+                    (
+                        "compactified_seeded_",
+                        "stacked_",
+                        "articulation_",
+                    )
+                )
                 else "baseline"
             ),
             "vertex_count": graph.vertex_count,
@@ -191,6 +209,7 @@ def main() -> None:
             "odd_degree_vertex_count": len(
                 diagnosis.odd_degree_vertices
             ),
+            "block_count": diagnosis.block_count,
             "certificate_valid": diagnosis.certificate_valid,
             "generic_search_nodes": generic_nodes,
             "generic_backtracks": generic_backtracks,

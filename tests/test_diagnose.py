@@ -10,6 +10,7 @@ from four_color_diagnostics import (
 )
 from four_color_diagnostics.fixtures import (
     checkerboard_diagonals,
+    clique_block_chain,
     compactified_grid_triangulation,
     flip_diagonal,
     named_fixtures,
@@ -65,6 +66,20 @@ def test_compactified_parity_transition() -> None:
     )
     assert diagnose_planar_graph(three).chromatic_number == 3
     assert diagnose_planar_graph(four).chromatic_number == 4
+
+
+def test_block_colorings_glue_at_articulation_vertices() -> None:
+    graph = clique_block_chain(5)
+    diagnosis = diagnose_planar_graph(graph)
+    assert diagnosis.chromatic_number == 4
+    assert diagnosis.route == "block_decomposition"
+    assert diagnosis.block_count == 5
+    assert diagnosis.certificate_valid
+    preblock = diagnose_planar_graph(
+        graph,
+        use_block_decomposition=False,
+    )
+    assert preblock.chromatic_number == diagnosis.chromatic_number
 
 
 def test_hierarchy_matches_blind_search_on_all_fixtures() -> None:

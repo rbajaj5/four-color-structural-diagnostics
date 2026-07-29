@@ -18,11 +18,15 @@ class AtlasAuditRow:
     vertex_count: int
     edge_count: int
     route: str
+    preblock_route: str
     structural_chromatic_number: int
     independent_chromatic_number: int
     certificate_valid: bool
     exact_match: bool
     independent_assignments_tested: int
+    preblock_search_nodes: int
+    block_search_nodes: int
+    block_search_nodes_saved: int
     dual_parity_agreement: bool | None
 
     def as_dict(self) -> dict[str, Any]:
@@ -84,6 +88,10 @@ def audit_graph_atlas(
             continue
         graph = Graph.from_networkx(nx_graph)
         diagnosis = diagnose_planar_graph(graph)
+        preblock = diagnose_planar_graph(
+            graph,
+            use_block_decomposition=False,
+        )
         independent_chi, _, assignments = independent_bruteforce_chromatic(
             graph
         )
@@ -99,6 +107,7 @@ def audit_graph_atlas(
                 vertex_count=graph.vertex_count,
                 edge_count=len(graph.edges),
                 route=diagnosis.route,
+                preblock_route=preblock.route,
                 structural_chromatic_number=diagnosis.chromatic_number,
                 independent_chromatic_number=independent_chi,
                 certificate_valid=diagnosis.certificate_valid,
@@ -106,6 +115,12 @@ def audit_graph_atlas(
                     diagnosis.chromatic_number == independent_chi
                 ),
                 independent_assignments_tested=assignments,
+                preblock_search_nodes=preblock.structural_search_nodes,
+                block_search_nodes=diagnosis.structural_search_nodes,
+                block_search_nodes_saved=(
+                    preblock.structural_search_nodes
+                    - diagnosis.structural_search_nodes
+                ),
                 dual_parity_agreement=dual_parity_agreement,
             )
         )

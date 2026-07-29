@@ -30,6 +30,7 @@ def test_exhaustive_planar_atlas_audit() -> None:
         row.dual_parity_agreement is not False
         for row in rows
     )
+    assert sum(row.block_search_nodes_saved for row in rows) > 0
 
 
 def test_stacked_triangulation_has_dual_parity_certificate() -> None:

@@ -10,8 +10,10 @@ The solver:
 3. uses the triangle-free planar theorem for non-bipartite triangle-free
    graphs;
 4. uses the even-degree criterion for sphere triangulations;
-5. asks the fixed 3-color question for the remaining planar graphs; and
-6. emits and directly verifies a proper coloring certificate.
+5. decomposes articulation-rich graphs into biconnected blocks and glues
+   their certificates by color permutation;
+6. asks the fixed 3-color question for the remaining planar cores; and
+7. emits and directly verifies a proper coloring certificate.
 
 For sphere triangulations, the implementation also constructs the planar
 dual and checks that dual bipartiteness agrees with the primal even-degree
@@ -44,7 +46,10 @@ Generated artifacts:
 - `results/atlas_audit_rows.csv`
 - `results/atlas_audit_summary_by_route.csv`
 - `results/atlas_route_distribution.png`
+- `results/atlas_block_savings_distribution.png`
 - `results/ATLAS_EXHAUSTIVE_AUDIT_REPORT.md`
+- `results/atlas_block_decomposition_outcomes.csv`
+- `results/STRUCTURE_RANDOMNESS_ADAPTATION.md`
 
 The benchmark includes a `10`, `26`, `50`, and `82` vertex size ladder of
 compactified checkerboard and one-diagonal-flip triangulations. It directly
@@ -56,6 +61,9 @@ An independent direct-assignment enumerator also audits all 1,015 nonempty
 planar graphs in the NetworkX graph atlas through seven vertices. It agrees
 with the structural hierarchy on all 1,015 and validates every emitted
 coloring edge by edge. The audit baseline does not call the DSATUR solver.
+The block layer saves 1,010 theorem-directed search nodes in aggregate on
+this domain, while the emitted outcome table also preserves the 42
+per-instance regressions.
 
 ## Scope
 
@@ -81,3 +89,5 @@ is checked independently against every edge.
   Triangulations*: https://dwest.web.illinois.edu/pubs/eultri.pdf
 - NetworkX graph atlas documentation:
   https://networkx.org/documentation/stable/reference/generated/networkx.generators.atlas.graph_atlas_g.html
+- Alweiss, Bowen, and Sabok, *Sums, products, and exponents in
+  two-colorings of the naturals*: https://arxiv.org/abs/2512.09598

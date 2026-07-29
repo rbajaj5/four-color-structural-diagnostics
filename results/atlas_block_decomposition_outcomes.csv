@@ -1,0 +1,4 @@
+outcome,graph_count,total_search_nodes_saved,minimum_search_nodes_saved,maximum_search_nodes_saved
+improved,472,1080,1,10
+tied,501,0,0,0
+regressed,42,-70,-4,-1

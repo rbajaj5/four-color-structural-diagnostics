@@ -124,6 +124,30 @@ def stacked_triangulation(vertex_count: int) -> Graph:
     return Graph.from_edges(vertex_count, edges)
 
 
+def clique_block_chain(block_count: int, clique_size: int = 4) -> Graph:
+    """Join complete planar blocks successively at articulation vertices."""
+
+    if block_count < 1:
+        raise ValueError("block_count must be positive")
+    if not 2 <= clique_size <= 4:
+        raise ValueError("planar clique blocks must have size two through four")
+    edges = set()
+    articulation = 0
+    next_vertex = 1
+    for _ in range(block_count):
+        block = [articulation] + list(
+            range(next_vertex, next_vertex + clique_size - 1)
+        )
+        for first_index, first in enumerate(block):
+            for second in block[first_index + 1 :]:
+                edges.add(
+                    (first, second) if first < second else (second, first)
+                )
+        articulation = block[-1]
+        next_vertex += clique_size - 1
+    return Graph.from_edges(next_vertex, edges)
+
+
 def stress_fixtures() -> tuple[tuple[str, Graph], ...]:
     fixtures = []
     for cell_count in (4, 6, 8):
@@ -141,6 +165,13 @@ def stress_fixtures() -> tuple[tuple[str, Graph], ...]:
             (
                 f"stacked_triangulation_{vertex_count}",
                 stacked_triangulation(vertex_count),
+            )
+        )
+    for block_count in (4, 8, 16):
+        fixtures.append(
+            (
+                f"articulation_k4_chain_{block_count}",
+                clique_block_chain(block_count),
             )
         )
     return tuple(fixtures)
