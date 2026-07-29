@@ -37,6 +37,7 @@ python scripts/run_structural_benchmark.py
 python scripts/run_atlas_audit.py
 python scripts/run_spectral_partition_audit.py
 python scripts/run_tait_spectral_gate.py
+python scripts/run_polygonal_projection_stability.py  # optional backend
 ```
 
 Generated artifacts:
@@ -68,6 +69,12 @@ Generated artifacts:
 - `results/tait_laplacian_spectra.png`
 - `results/TAIT_SPECTRAL_DETERMINANT_REPORT.md`
 - `results/PARDON_TRANSFER_NOTES.md`
+- `results/geometry_backend_availability.json`
+- `results/polygonal_projection_stability_rows.csv`
+- `results/polygonal_projection_stability_summary.csv`
+- `results/polygonal_projection_stability_errors.csv`
+- `results/polygonal_projection_stability.png`
+- `results/POLYGONAL_PROJECTION_STABILITY_REPORT.md`
 
 The benchmark includes a `10`, `26`, `50`, and `82` vertex size ladder of
 compactified checkerboard and one-diagonal-flip triangulations. It directly
@@ -100,7 +107,8 @@ This is proof-guided finite software. It is not:
 - evidence for an asymptotic DSATUR improvement;
 - a formal proof derived from the finite graph-atlas audit;
 - a weighted routing or integrality theorem; or
-- a knot invariant.
+- a knot invariant; or
+- a theorem that every polygonal approximation or projection is stable.
 
 For later knot work, the report records the precise alternating-diagram
 bridge through Tait-graph spanning-tree counts and the Matrix-Tree Theorem;
@@ -114,6 +122,20 @@ classifier.
 geometry layer: distortion and intersection counts, polygonal refinement
 under geometric inequalities, and affine-invariant local decompositions for
 random polygon statistics. None is claimed to prove the Tait identity.
+
+The first Pardon-inspired geometry experiment is now implemented. It
+extracts Gauss/PD data from polygonal `3_1`, `5_1`, and `4_1` embeddings
+under exact edge subdivision, smooth resampling, and four projection
+directions. The strict raw-diagram gate passes 116 of 120 rows; a small
+Spherogram simplification gate passes 118 of 120. Two coarse figure-eight
+projections add a removable crossing pair, whereas an exactly axis-aligned
+trefoil projection exposes a pyknotid vertex-crossing failure at high
+subdivision. All tested small generic tilts avoid that trefoil failure.
+
+`pyknotid` and Spherogram are optional local experiment backends rather than
+core dependencies. The script writes an explicit backend audit and exits if
+`pyknotid` is unavailable. This keeps the exact graph and Tait test suite
+portable across the Python versions used in CI.
 
 NetworkX supplies planarity recognition. Every emitted coloring certificate
 is checked independently against every edge.
