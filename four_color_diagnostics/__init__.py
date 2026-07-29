@@ -15,6 +15,13 @@ from .spectral import (
     verify_coalescence_identity,
     verify_disjoint_union_identity,
 )
+from .tait import (
+    TaitGraph,
+    TaitPair,
+    faces_from_pd_code,
+    fox_coloring_determinant,
+    tait_graphs_from_pd_code,
+)
 
 __all__ = [
     "ColoringResult",
@@ -22,16 +29,21 @@ __all__ = [
     "Graph",
     "PartitionResult",
     "SpectralFeatures",
+    "TaitGraph",
+    "TaitPair",
     "articulation_separator_partition",
     "audit_graph_atlas",
     "bfs_balanced_partition",
     "connected_component_partition",
     "diagnose_planar_graph",
     "fiedler_partition",
+    "faces_from_pd_code",
+    "fox_coloring_determinant",
     "generic_exact_chromatic",
     "independent_bruteforce_chromatic",
     "solve_k_coloring",
     "spectral_features",
+    "tait_graphs_from_pd_code",
     "verify_coalescence_identity",
     "verify_disjoint_union_identity",
     "verify_coloring",

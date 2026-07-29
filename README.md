@@ -36,6 +36,7 @@ python -m pytest -q
 python scripts/run_structural_benchmark.py
 python scripts/run_atlas_audit.py
 python scripts/run_spectral_partition_audit.py
+python scripts/run_tait_spectral_gate.py
 ```
 
 Generated artifacts:
@@ -60,6 +61,13 @@ Generated artifacts:
 - `results/spectral_partition_comparison.png`
 - `results/spectral_gain_scatter.png`
 - `results/SPECTRAL_PARTITION_REPORT.md`
+- `results/tait_fixture_registry.csv`
+- `results/tait_fixture_rows.csv`
+- `results/tait_graph_rows.csv`
+- `results/tait_backend_availability.json`
+- `results/tait_laplacian_spectra.png`
+- `results/TAIT_SPECTRAL_DETERMINANT_REPORT.md`
+- `results/PARDON_TRANSFER_NOTES.md`
 
 The benchmark includes a `10`, `26`, `50`, and `82` vertex size ladder of
 compactified checkerboard and one-diagonal-flip triangulations. It directly
@@ -96,7 +104,16 @@ This is proof-guided finite software. It is not:
 
 For later knot work, the report records the precise alternating-diagram
 bridge through Tait-graph spanning-tree counts and the Matrix-Tree Theorem;
-no diagram parser or knot classification claim is included here.
+the fixture gate now implements that bridge for `3_1`, `4_1`, `5_1`, and
+`5_2`. Both checkerboard graphs, their Laplacian spectra, and an independent
+Fox-coloring determinant agree with the expected values. The retained
+`det(4_1) = det(5_1)` collision demonstrates that this is not a knot
+classifier.
+
+`PARDON_TRANSFER_NOTES.md` reviews three precise ideas for the subsequent
+geometry layer: distortion and intersection counts, polygonal refinement
+under geometric inequalities, and affine-invariant local decompositions for
+random polygon statistics. None is claimed to prove the Tait identity.
 
 NetworkX supplies planarity recognition. Every emitted coloring certificate
 is checked independently against every edge.

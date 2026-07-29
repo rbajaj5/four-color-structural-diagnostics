@@ -1,0 +1,5 @@
+knot_name,crossing_count,expected_determinant,alternating_fixture,pd_code,source
+3_1,3,3,True,"[[5, 2, 0, 3], [3, 0, 4, 1], [1, 4, 2, 5]]",Spherogram named table; determinant cross-check: KnotInfo
+4_1,4,5,True,"[[7, 4, 0, 5], [3, 0, 4, 1], [1, 7, 2, 6], [5, 3, 6, 2]]",Spherogram named table; determinant cross-check: KnotInfo
+5_1,5,5,True,"[[9, 4, 0, 5], [5, 0, 6, 1], [1, 6, 2, 7], [7, 2, 8, 3], [3, 8, 4, 9]]",Spherogram named table; determinant cross-check: KnotInfo
+5_2,5,7,True,"[[4, 0, 5, 9], [0, 6, 1, 5], [8, 2, 9, 1], [2, 8, 3, 7], [6, 4, 7, 3]]",Spherogram named table; determinant cross-check: KnotInfo

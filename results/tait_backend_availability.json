@@ -1,0 +1,52 @@
+{
+  "python_executable": "C:\\Users\\anaxe\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+  "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "spherogram_available": true,
+  "snappy_available": true,
+  "regina_available": false,
+  "sageall_available": false,
+  "sage_command_available": false,
+  "named_fixture_checks": [
+    {
+      "name": "3_1",
+      "loaded": true,
+      "crossing_count": 3,
+      "component_count": 1,
+      "alternating": true,
+      "pd_code_exact_match": true,
+      "face_partition_match": true,
+      "error": ""
+    },
+    {
+      "name": "4_1",
+      "loaded": true,
+      "crossing_count": 4,
+      "component_count": 1,
+      "alternating": true,
+      "pd_code_exact_match": true,
+      "face_partition_match": true,
+      "error": ""
+    },
+    {
+      "name": "5_1",
+      "loaded": true,
+      "crossing_count": 5,
+      "component_count": 1,
+      "alternating": true,
+      "pd_code_exact_match": true,
+      "face_partition_match": true,
+      "error": ""
+    },
+    {
+      "name": "5_2",
+      "loaded": true,
+      "crossing_count": 5,
+      "component_count": 1,
+      "alternating": true,
+      "pd_code_exact_match": true,
+      "face_partition_match": true,
+      "error": ""
+    }
+  ],
+  "spherogram_version": "2.4.1"
+}
