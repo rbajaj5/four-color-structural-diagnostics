@@ -74,8 +74,74 @@
   },
   "claim": "Exact counterexample to Zhang (2018), Conjecture 4.1",
   "claim_status": "mathematically verified; literature priority not certified",
+  "corrected_constant_lower_bound": {
+    "factor_over_zhang_constant": "1 + sqrt(2)",
+    "inequality_template": "norm(X) <= c*norm(A+B+C+D)^4",
+    "interpretation": "The ratio decreases for t >= 0 while the negative eigenvalue controls the norm. Positive-definite examples approach the same lower bound as t tends to zero from above.",
+    "necessary_universal_lower_bound_for_c": "1/64 + sqrt(2)/64",
+    "positive_definite_family_ratio": "(-8*t**3 - 12*t**2 - 2*t + 1 + sqrt(2))/(64*(2*t + 1)**3)",
+    "ratio_derivative": "(-8*t - 3*sqrt(2) - 4)/(32*(2*t + 1)**4)",
+    "zhang_proposed_c": "1/64"
+  },
+  "full_recht_re_aggregate_application": {
+    "interpretation": "The local Zhang estimate fails, but cancellation among all 24 ordered products preserves the full four-matrix average inequality.",
+    "setting": "Recht-Re full average with m=n=4",
+    "slack_when_symmetrized_scalar_negative": "(96*t**4 + 192*t**3 + 120*t**2 + 24*t + 1)/48",
+    "slack_when_symmetrized_scalar_nonnegative": "(24*t**2 + 24*t + 5)/48",
+    "strict_inequality_for_all_t_nonnegative": true,
+    "symmetrized_24_product_sum": [
+      [
+        "24*t**4 + 48*t**3 + 24*t**2 - 1",
+        "0"
+      ],
+      [
+        "0",
+        "24*t**4 + 48*t**3 + 24*t**2 - 1"
+      ]
+    ],
+    "symmetrized_scalar_sign_switch": "-1/2 + sqrt(3*sqrt(6) + 9)/6",
+    "symmetrized_scalar_sign_switch_numeric": "0.1738873386790491615691993031613085520681",
+    "t_zero": {
+      "symmetrized_24_product_sum": [
+        [
+          "-1",
+          "0"
+        ],
+        [
+          "0",
+          "-1"
+        ]
+      ],
+      "with_replacement_norm": "1/16",
+      "without_replacement_norm": "1/24",
+      "without_to_with_ratio": "2/3"
+    },
+    "with_replacement_average": [
+      [
+        "(2*t + 1)**4/16",
+        "0"
+      ],
+      [
+        "0",
+        "(2*t + 1)**4/16"
+      ]
+    ],
+    "with_replacement_norm": "(2*t + 1)**4/16",
+    "without_replacement_average": [
+      [
+        "t**4 + 2*t**3 + t**2 - 1/24",
+        "0"
+      ],
+      [
+        "0",
+        "t**4 + 2*t**3 + t**2 - 1/24"
+      ]
+    ],
+    "without_replacement_norm": "Abs(24*t**4 + 48*t**3 + 24*t**2 - 1)/24"
+  },
   "method": "exact symbolic arithmetic over Q(sqrt(2))",
   "parametric_positive_definite_family": {
+    "condition_number_threshold_numeric": "8.965632387915969850702793605275344224512",
     "conjectured_bound": "(2*t + 1)**4/4",
     "eigenvalues": [
       "(2*t + 1)*(8*t**3 + 12*t**2 + 2*t - sqrt(2) - 1)/4",
@@ -91,12 +157,14 @@
         "t*(8*t**3 + 16*t**2 + 8*t + 1)/2"
       ]
     ],
+    "matrix_condition_number_for_t_positive": "(1+t)/t",
     "matrix_family": "A_t=A+tI, B_t=B+tI, C_t=C+tI, D_t=D+tI",
     "operator_norm_on_violation_interval": "(2*t + 1)*(-8*t**3 - 12*t**2 - 2*t + 1 + sqrt(2))/4",
     "parameter_domain": "t >= 0",
     "rho_definition": "unique positive root of 16*t^3+24*t^2+8*t=sqrt(2)",
     "rho_numeric": "0.1255393107918237372503393691106824488992",
     "sum": "2*(2*t + 1)*I_2",
+    "violation_condition_number_range": "kappa > 1 + 1/rho",
     "violation_gap": "(2*t + 1)*(-16*t**3 - 24*t**2 - 8*t + sqrt(2))/4",
     "violation_interval": "0 <= t < rho"
   },

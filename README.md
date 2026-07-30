@@ -114,7 +114,9 @@ two-dimensional counterexample to Conjecture 4.1 in Teng Zhang's
 rank-one positive semidefinite projectors violate the stated operator-norm
 bound by the exact ratio \(1+\sqrt2\). Adding \(tI\) to each matrix gives a
 strictly positive-definite counterexample for an exact nonzero interval of
-\(t\).
+\(t\). Exact expansion also shows that cancellation among all 24 ordered
+products preserves the full four-matrix Recht-Re average inequality on this
+entire family, despite failure of the proposed termwise estimate.
 
 This note is mathematically independent of the Four Color experiments.
 Its exact calculation is verified in CI; its literature priority is not

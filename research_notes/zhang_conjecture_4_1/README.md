@@ -100,6 +100,17 @@ counterexample. At \(t=1/10\), the left-hand matrix is
 its norm is \(126/625+3\sqrt2/10\), and the conjectured bound is
 \(324/625\).
 
+Each matrix \(M+tI\) has spectral condition number
+\(\kappa=(1+t)/t\). Consequently, the violating interval in this family is
+equivalently
+
+\[
+\kappa>1+\rho^{-1}=8.9656323879\ldots.
+\]
+
+This family therefore does not settle possible variants restricted to
+uniformly well-conditioned positive-definite matrices.
+
 ## Minimal Dimension
 
 The scalar case is true. For nonnegative scalars \(a,b,c,d\), the left side
@@ -120,6 +131,76 @@ The counterexample invalidates that proposed estimate and therefore that
 proof route. It does **not** refute the full four-matrix Recht-Re inequality.
 Lai and Lim later reported that the full \((m,n)=(4,4)\) case passes their
 noncommutative-Positivstellensatz/SDP check.
+
+The projector family makes the distinction explicit. For
+\(M_1=A_t,\ldots,M_4=D_t\), exact expansion of all \(24\) distinct-order
+products gives
+
+\[
+\sum_{\sigma\in S_4}
+M_{\sigma(1)}M_{\sigma(2)}M_{\sigma(3)}M_{\sigma(4)}
+=
+\left(24t^4+48t^3+24t^2-1\right)I.
+\]
+
+Thus the without-replacement and with-replacement averages are
+
+\[
+\frac{24t^4+48t^3+24t^2-1}{24}I
+\quad\text{and}\quad
+\frac{(2t+1)^4}{16}I,
+\]
+
+respectively. Their operator norms satisfy the strict Recht-Re inequality
+for every \(t\geq0\). If the first scalar is nonnegative, the norm slack is
+
+\[
+\frac{24t^2+24t+5}{48}>0.
+\]
+
+If it is negative, the norm slack is
+
+\[
+\frac{96t^4+192t^3+120t^2+24t+1}{48}>0.
+\]
+
+At \(t=0\), the complete symmetrized sum is \(-I\), and the
+without-replacement to with-replacement norm ratio is exactly \(2/3\).
+This is a concrete cancellation certificate: a local termwise estimate
+fails while the complete permutation average remains valid.
+
+## Necessary Replacement Constant
+
+Any universal inequality of the same local form
+
+\[
+\|A(BC+CB)D+D(BC+CB)A\|
+\leq c\|A+B+C+D\|^4
+\]
+
+must have
+
+\[
+c\geq\frac{1+\sqrt2}{64}.
+\]
+
+This is \(1+\sqrt2\) times Zhang's proposed constant. The same lower bound
+is necessary even if the matrices are required to be strictly positive
+definite: the \(M+tI\) examples approach it as \(t\downarrow0\).
+Within the interval where the negative eigenvalue controls the norm, the
+ratio equals
+
+\[
+c(t)=
+\frac{1+\sqrt2-8t^3-12t^2-2t}{64(2t+1)^3}
+\]
+
+and
+
+\[
+c'(t)=
+-\frac{8t+4+3\sqrt2}{32(2t+1)^4}<0.
+\]
 
 ## Reproduce
 
