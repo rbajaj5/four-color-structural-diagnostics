@@ -76,6 +76,15 @@ Generated artifacts:
 - `results/prime_knot_volume_backend.json`
 - `results/prime_knot_volume_diagnostics.png`
 - `results/PRIME_KNOT_VOLUME_REPORT.md`
+- `results/prime_knot_length_spectrum_rows.csv`
+- `results/prime_knot_short_geodesic_records.csv`
+- `results/prime_knot_length_spectrum_summary.csv`
+- `results/prime_knot_length_spectrum_collisions.csv`
+- `results/prime_knot_length_spectrum_errors.csv`
+- `results/prime_knot_length_spectrum_backend.json`
+- `results/prime_knot_length_spectrum_diagnostics.png`
+- `results/PRIME_KNOT_LENGTH_SPECTRUM_REPORT.md`
+- `results/PARDON_ANOSOV_TRANSFER_NOTES.md`
 - `results/PARDON_TRANSFER_NOTES.md`
 - `results/geometry_backend_availability.json`
 - `results/polygonal_projection_stability_rows.csv`
@@ -176,6 +185,25 @@ beside the numerical geometric values. Equal-determinant pairs such as
 `4_1`/`5_1` and `5_2`/`7_1` have different volumes, demonstrating that
 these graph-derived invariants do not determine complement geometry.
 
+The follow-on short-length-spectrum gate processes all 31 hyperbolic
+fixtures numerically through real-length cutoff `3.0`. It records
+orientation-independent length ratios, multiplicity-weighted short-length
+spread, finite geodesic-count growth, and complex-holonomy angle sectors.
+A fixed-alpha leave-one-out comparison shows that adding only the shortest
+geodesic reduces volume-prediction RMSE by 5.25% relative to crossing
+count, log determinant, and maximum Tait spectral radius. Adding the full
+12-feature local/angular stack slightly worsens held-out error. All 15
+hyperbolic equal-determinant pairs have distinct five-record finite
+fingerprints in this census, but the fingerprints are numerical, unmarked,
+cutoff-dependent diagnostics rather than complete invariants.
+
+The higher-Teichmuller analogy is deliberately limited. Pressure metrics
+use full marked length spectra for Anosov representations, whereas cusped
+knot-complement holonomy has parabolics and belongs near relative Anosov
+theory. The gate computes neither a pressure metric nor a rigorous entropy.
+Its use of normalized local sectors transfers a statistical design pattern
+from Pardon's random-polygon work, not Pardon's central limit theorem.
+
 A deterministic 128-direction Fibonacci-sphere audit then broadens the
 projection check. All 384 extracted diagrams retain the fixture's Fox
 determinant, while raw crossing counts vary from `3-9`, `5-18`, and `4-19`
@@ -211,3 +239,11 @@ is checked independently against every edge.
   https://snappy.computop.org/verify.html
 - Murakami and Murakami, *The Colored Jones Polynomials and the Simplicial
   Volume of a Knot*: https://arxiv.org/abs/math/9905075
+- Pardon, *Central limit theorems for random polygons in an arbitrary
+  convex set*: https://arxiv.org/abs/1003.4209
+- Guichard and Wienhard, *Anosov representations: Domains of discontinuity
+  and applications*: https://arxiv.org/abs/1108.0733
+- Bridgeman, Canary, Labourie, and Sambarino, *The pressure metric for
+  Anosov representations*: https://arxiv.org/abs/1301.7459
+- Weisman, *An extended definition of Anosov representation for relatively
+  hyperbolic groups*: https://arxiv.org/abs/2205.07183

@@ -1,0 +1,12 @@
+summary_type,name,row_count,features,rmse,mae,correlation_with_volume,rmse_improvement_over_baseline,mae_improvement_over_baseline,improved_row_count,paired_non_tie_count,sign_test_pvalue_two_sided
+loocv_model,compressed_invariant_baseline,31,crossing_count log_fox_determinant maximum_tait_spectral_radius,0.3464843151972125,0.26602113733753724,,0.0,0.0,0,0,1.0
+loocv_model,systole_augmented,31,crossing_count log_fox_determinant maximum_tait_spectral_radius systole_numeric,0.32829055169453136,0.26545765555049106,,0.01819376350268115,0.0005634817870461828,13,31,0.47312965989112854
+loocv_model,compact_geometry_augmented,31,crossing_count log_fox_determinant maximum_tait_spectral_radius systole_numeric short_length_cv,0.3414019914217591,0.2619222707552185,,0.005082323775453423,0.004098866582318728,16,31,1.0
+loocv_model,full_local_angular_augmented,31,crossing_count log_fox_determinant maximum_tait_spectral_radius systole_numeric second_to_first_length_ratio short_length_cv geodesic_count_le_1_5 geodesic_count_le_2_0 geodesic_count_le_2_5 finite_counting_entropy_proxy twist_angle_entropy_8bin twist_angle_resultant,0.3474002876481493,0.2728451903379592,,-0.000915972450936775,-0.006824053000421937,13,31,0.47312965989112854
+feature_correlation,systole_numeric,31,systole_numeric,,,0.7490769298421726,,,,,
+feature_correlation,second_to_first_length_ratio,31,second_to_first_length_ratio,,,-0.48393266199019813,,,,,
+feature_correlation,short_length_cv,31,short_length_cv,,,-0.8704396174981155,,,,,
+feature_correlation,geodesic_count_le_2_5,31,geodesic_count_le_2_5,,,-0.0541685999504589,,,,,
+feature_correlation,finite_counting_entropy_proxy,31,finite_counting_entropy_proxy,,,0.44946888799164664,,,,,
+feature_correlation,twist_angle_entropy_8bin,31,twist_angle_entropy_8bin,,,-0.21947702618720713,,,,,
+feature_correlation,twist_angle_resultant,31,twist_angle_resultant,,,0.33762309733014817,,,,,

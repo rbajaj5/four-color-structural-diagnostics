@@ -1,0 +1,12 @@
+knot_name,failed_attempt,error_message,recovered
+7_7,0,RuntimeError: The Dirichlet construction failed.,True
+8_4,0,RuntimeError: The Dirichlet construction failed.,True
+8_7,0,RuntimeError: The Dirichlet construction failed.,True
+8_7,1,RuntimeError: The Dirichlet construction failed.,True
+8_7,2,RuntimeError: The Dirichlet construction failed.,True
+8_7,3,RuntimeError: The Dirichlet construction failed.,True
+8_11,0,RuntimeError: The Dirichlet construction failed.,True
+8_11,1,RuntimeError: The Dirichlet construction failed.,True
+8_13,0,RuntimeError: The Dirichlet construction failed.,True
+8_15,0,RuntimeError: The Dirichlet construction failed.,True
+8_16,0,RuntimeError: The Dirichlet construction failed.,True
