@@ -37,6 +37,7 @@ python scripts/run_structural_benchmark.py
 python scripts/run_atlas_audit.py
 python scripts/run_spectral_partition_audit.py
 python scripts/run_tait_spectral_gate.py
+python scripts/run_prime_knot_volume_gate.py  # optional SnapPy backend
 python scripts/run_polygonal_projection_stability.py  # optional backend
 python scripts/run_angular_projection_sweep.py  # optional backend
 ```
@@ -69,6 +70,12 @@ Generated artifacts:
 - `results/tait_backend_availability.json`
 - `results/tait_laplacian_spectra.png`
 - `results/TAIT_SPECTRAL_DETERMINANT_REPORT.md`
+- `results/prime_knot_volume_rows.csv`
+- `results/prime_knot_volume_collisions.csv`
+- `results/prime_knot_volume_summary.csv`
+- `results/prime_knot_volume_backend.json`
+- `results/prime_knot_volume_diagnostics.png`
+- `results/PRIME_KNOT_VOLUME_REPORT.md`
 - `results/PARDON_TRANSFER_NOTES.md`
 - `results/geometry_backend_availability.json`
 - `results/polygonal_projection_stability_rows.csv`
@@ -161,6 +168,14 @@ core dependencies. The script writes an explicit backend audit and exits if
 `pyknotid` is unavailable. This keeps the exact graph and Tait test suite
 portable across the Python versions used in CI.
 
+The prime-knot volume gate covers all 35 named prime knots through eight
+crossings. It separates ordinary hyperbolic volume from the generalized
+sum of hyperbolic JSJ-piece volumes, which is zero for the four torus-knot
+fixtures. Exact Fox determinants and checkerboard spectra are retained
+beside the numerical geometric values. Equal-determinant pairs such as
+`4_1`/`5_1` and `5_2`/`7_1` have different volumes, demonstrating that
+these graph-derived invariants do not determine complement geometry.
+
 A deterministic 128-direction Fibonacci-sphere audit then broadens the
 projection check. All 384 extracted diagrams retain the fixture's Fox
 determinant, while raw crossing counts vary from `3-9`, `5-18`, and `4-19`
@@ -192,3 +207,7 @@ is checked independently against every edge.
   https://arxiv.org/abs/1411.5058
 - Lai and Lim, *Recht-Re Noncommutative Arithmetic-Geometric Mean
   Conjecture is False*: https://arxiv.org/abs/2006.01510
+- SnapPy volume and verified-computation documentation:
+  https://snappy.computop.org/verify.html
+- Murakami and Murakami, *The Colored Jones Polynomials and the Simplicial
+  Volume of a Knot*: https://arxiv.org/abs/math/9905075

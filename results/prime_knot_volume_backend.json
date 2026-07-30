@@ -1,0 +1,12 @@
+{
+  "python_executable": "C:\\Users\\anaxe\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+  "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "regina_available": false,
+  "sage_command_available": false,
+  "sageall_available": false,
+  "snappy_available": true,
+  "snappy_version": "3.3.2",
+  "spherogram_available": true,
+  "v3": 1.0149416064096537,
+  "volume_policy": "Use SnapPy numerical volume only after the fixture geometry and numerical solution type agree. Mark rigorous verification unavailable when Sage interval arithmetic is absent."
+}
