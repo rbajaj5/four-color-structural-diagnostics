@@ -1,0 +1,18 @@
+{
+  "python_executable": "C:\\Users\\anaxe\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+  "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "numpy_version": "2.4.2",
+  "pyknotid_available": true,
+  "planarity_available": false,
+  "spherogram_available": true,
+  "numpy_legacy_aliases_added": [
+    "float",
+    "int",
+    "complex"
+  ],
+  "backend_role": "optional local 3D polygon to Gauss/PD extraction; not a core package dependency",
+  "pyknotid_version": "0.5.3",
+  "import_messages": "Could not import cythonised chelpers, using Python alternative. This will give the same result, but is slower.",
+  "spherogram_version": "2.4.1",
+  "backend_status": "available"
+}

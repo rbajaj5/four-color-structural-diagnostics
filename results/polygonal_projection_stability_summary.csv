@@ -1,0 +1,7 @@
+fixture,source_mode,row_count,extraction_pass_count,projection_stability_pass_count,expected_determinant_pass_count,topological_fixture_pass_count,generic_projection_row_count,generic_projection_stability_pass_count,alternating_projection_count,tait_construction_pass_count,tait_construction_failure_count,tait_shortcut_agreement_count,first_stable_resolution,minimum_crossing_angle_degrees,minimum_normalized_depth_separation,minimum_crossing_vertex_parameter_margin,maximum_vertex_distortion_estimate,total_runtime_seconds
+3_1_torus_T_2_3,exact_polygon_subdivision,16,16,14,14,14,12,12,14,14,0,14,,28.106285781643642,0.24549372527249905,0.0,8.512417816499136,0.04508209996856749
+3_1_torus_T_2_3,smooth_parametric_resampling,24,24,24,24,24,18,18,24,24,0,24,16,28.106285781643685,0.21758673680392346,0.0,7.962050250057112,0.04429580000578426
+5_1_torus_T_2_5,exact_polygon_subdivision,16,16,16,16,16,12,12,16,16,0,16,32,54.59266119789174,0.21634784961665093,0.0,14.411257480427535,0.08636099999421276
+5_1_torus_T_2_5,smooth_parametric_resampling,24,24,24,24,24,18,18,24,24,0,24,16,54.05814024975832,0.14279931402788087,0.0,14.557178462343233,0.07497780001722276
+4_1_figure_eight,exact_polygon_subdivision,16,16,16,16,16,12,12,16,16,0,16,32,12.378656642366844,0.19193501970368818,0.0033158004813031994,14.809651474982955,0.0792356000165455
+4_1_figure_eight,smooth_parametric_resampling,24,24,22,24,24,18,16,22,22,0,22,32,0.1159922196334641,0.13683200510493865,0.0,14.029836183611144,0.05428729995037429

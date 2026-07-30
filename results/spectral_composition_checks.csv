@@ -1,0 +1,6 @@
+case_id,composition_type,first_vertex_count,second_vertex_count,first_root,second_root,identity,exact_pass,lhs_coefficients,rhs_coefficients
+direct_sum_K4_C5,disjoint_union,4,5,,,phi(G disjoint H) = phi(G) phi(H),True,1 0 -11 -8 32 38 -15 -28 1 6,1 0 -11 -8 32 38 -15 -28 1 6
+direct_sum_C5_P4,disjoint_union,5,4,,,phi(G disjoint H) = phi(G) phi(H),True,1 0 -8 0 21 -2 -20 6 5 -2,1 0 -8 0 21 -2 -20 6 5 -2
+coalescence_K4_C5,one_vertex_gluing,4,5,0,2,phi(G.u.H)=phi(G)phi(H-v)+phi(G-u)phi(H)-lambda phi(G-u)phi(H-v),True,1 0 -11 -8 26 26 -9 -10 1,1 0 -11 -8 26 26 -9 -10 1
+coalescence_K4_K4,one_vertex_gluing,4,4,1,3,phi(G.u.H)=phi(G)phi(H-v)+phi(G-u)phi(H)-lambda phi(G-u)phi(H-v),True,1 0 -12 -16 21 60 46 12,1 0 -12 -16 21 60 46 12
+coalescence_wheel_P4,one_vertex_gluing,6,4,0,0,phi(G.u.H)=phi(G)phi(H-v)+phi(G-u)phi(H)-lambda phi(G-u)phi(H-v),True,1 0 -13 -10 36 28 -35 -14 15 -2,1 0 -13 -10 36 28 -35 -14 15 -2
