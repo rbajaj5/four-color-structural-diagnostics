@@ -105,6 +105,21 @@ Fiedler-median cuts use fewer boundary edges than equally balanced BFS cuts,
 but block count and articulation count have stronger finite associations
 with search-node savings than the spectral features tested.
 
+## Independent Matrix-Analysis Note
+
+The repository also carries a self-contained
+[exact certificate](research_notes/zhang_conjecture_4_1/README.md) for a
+two-dimensional counterexample to Conjecture 4.1 in Teng Zhang's
+*A Note on the Matrix Arithmetic-Geometric Mean Inequality*. Four
+rank-one positive semidefinite projectors violate the stated operator-norm
+bound by the exact ratio \(1+\sqrt2\). Adding \(tI\) to each matrix gives a
+strictly positive-definite counterexample for an exact nonzero interval of
+\(t\).
+
+This note is mathematically independent of the Four Color experiments.
+Its exact calculation is verified in CI; its literature priority is not
+claimed. A bounded search record is included beside the certificate.
+
 ## Scope
 
 This is proof-guided finite software. It is not:
@@ -171,3 +186,7 @@ is checked independently against every edge.
 - Matrix-Tree Theorem background: https://arxiv.org/abs/2209.01284
 - Alternating-link determinant and Tait spanning trees:
   https://repository.lsu.edu/mathematics_pubs/235/
+- Teng Zhang, *A Note on the Matrix Arithmetic-Geometric Mean Inequality*:
+  https://arxiv.org/abs/1411.5058
+- Lai and Lim, *Recht-Re Noncommutative Arithmetic-Geometric Mean
+  Conjecture is False*: https://arxiv.org/abs/2006.01510

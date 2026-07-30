@@ -1,0 +1,140 @@
+{
+  "base_counterexample": {
+    "conjectured_bound": "1/4",
+    "dimension": 2,
+    "eigenvalues": [
+      "-sqrt(2)/4 - 1/4",
+      "-1/4 + sqrt(2)/4"
+    ],
+    "expression": [
+      [
+        "-1/2",
+        "-1/4"
+      ],
+      [
+        "-1/4",
+        "0"
+      ]
+    ],
+    "matrices": {
+      "A": [
+        [
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "0"
+        ]
+      ],
+      "B": [
+        [
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "C": [
+        [
+          "1/2",
+          "-1/2"
+        ],
+        [
+          "-1/2",
+          "1/2"
+        ]
+      ],
+      "D": [
+        [
+          "1/2",
+          "1/2"
+        ],
+        [
+          "1/2",
+          "1/2"
+        ]
+      ]
+    },
+    "operator_norm": "1/4 + sqrt(2)/4",
+    "sum": [
+      [
+        "2",
+        "0"
+      ],
+      [
+        "0",
+        "2"
+      ]
+    ],
+    "violation_gap": "sqrt(2)/4",
+    "violation_ratio": "1 + sqrt(2)"
+  },
+  "claim": "Exact counterexample to Zhang (2018), Conjecture 4.1",
+  "claim_status": "mathematically verified; literature priority not certified",
+  "method": "exact symbolic arithmetic over Q(sqrt(2))",
+  "parametric_positive_definite_family": {
+    "conjectured_bound": "(2*t + 1)**4/4",
+    "eigenvalues": [
+      "(2*t + 1)*(8*t**3 + 12*t**2 + 2*t - sqrt(2) - 1)/4",
+      "(2*t + 1)*(8*t**3 + 12*t**2 + 2*t - 1 + sqrt(2))/4"
+    ],
+    "expression": [
+      [
+        "4*t**4 + 8*t**3 + 4*t**2 - t/2 - 1/2",
+        "-t/2 - 1/4"
+      ],
+      [
+        "-t/2 - 1/4",
+        "t*(8*t**3 + 16*t**2 + 8*t + 1)/2"
+      ]
+    ],
+    "matrix_family": "A_t=A+tI, B_t=B+tI, C_t=C+tI, D_t=D+tI",
+    "operator_norm_on_violation_interval": "(2*t + 1)*(-8*t**3 - 12*t**2 - 2*t + 1 + sqrt(2))/4",
+    "parameter_domain": "t >= 0",
+    "rho_definition": "unique positive root of 16*t^3+24*t^2+8*t=sqrt(2)",
+    "rho_numeric": "0.1255393107918237372503393691106824488992",
+    "sum": "2*(2*t + 1)*I_2",
+    "violation_gap": "(2*t + 1)*(-16*t**3 - 24*t**2 - 8*t + sqrt(2))/4",
+    "violation_interval": "0 <= t < rho"
+  },
+  "positive_definite_counterexample": {
+    "conjectured_bound": "324/625",
+    "eigenvalues": [
+      "-3*sqrt(2)/10 - 126/625",
+      "-126/625 + 3*sqrt(2)/10"
+    ],
+    "expression": [
+      [
+        "-627/1250",
+        "-3/10"
+      ],
+      [
+        "-3/10",
+        "123/1250"
+      ]
+    ],
+    "operator_norm": "126/625 + 3*sqrt(2)/10",
+    "positive_definite": true,
+    "smallest_matrix_eigenvalue": "1/10",
+    "sum": [
+      [
+        "12/5",
+        "0"
+      ],
+      [
+        "0",
+        "12/5"
+      ]
+    ],
+    "t": "1/10",
+    "violation_gap": "-198/625 + 3*sqrt(2)/10"
+  },
+  "scalar_case": {
+    "proof": "For nonnegative scalars, the left side is 4abcd and (a+b+c+d)^4/64 >= 4abcd by AM-GM.",
+    "status": "true"
+  },
+  "source": "https://arxiv.org/abs/1411.5058"
+}

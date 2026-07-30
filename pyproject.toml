@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "four-color-structural-diagnostics"
-version = "0.7.0"
+version = "0.8.0"
 description = "Proof-guided exact chromatic diagnostics for finite planar graphs"
 requires-python = ">=3.11"
 dependencies = [
